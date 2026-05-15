@@ -3,6 +3,8 @@ kind: Service
 metadata:
   annotations:
     alb.ingress.kubernetes.io/backend-protocol-version: GRPC # This tells AWS to send traffic from the ALB using GRPC. Plain HTTP2 can be used, but the health checks won't be available because argo currently downgrades non-grpc calls to HTTP1
+    alb.ingress.kubernetes.io/healthcheck-path: /grpc.health.v1.Health/Check
+    alb.ingress.kubernetes.io/success-codes: "0"
   labels:
     app: argogrpc
   name: argogrpc
@@ -16,7 +18,6 @@ spec:
   selector:
     app.kubernetes.io/name: argocd-server
   sessionAffinity: None
-  type: NodePort
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -33,9 +34,6 @@ metadata:
     # TODO: set up a TLS cert
     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
-    # Use this annotation to receive OK - 0 instead of UNIMPLEMENTED - 12 for gRPC health check.
-    alb.ingress.kubernetes.io/healthcheck-path: /grpc.health.v1.Health/Check
-    alb.ingress.kubernetes.io/success-codes: "0"
   name: argocd
   namespace: argocd
 spec:
