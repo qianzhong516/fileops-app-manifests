@@ -9,8 +9,8 @@ metadata:
   namespace: argocd
 spec:
   ports:
-    - name: "443"
-      port: 443
+    - name: "80"
+      port: 80
       protocol: TCP
       targetPort: 8080
   selector:
@@ -25,6 +25,7 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/target-type: ip
     # alb.ingress.kubernetes.io/backend-protocol: HTTPS
     # Use this annotation (which must match a service name) to route traffic to HTTP2 backends.
     alb.ingress.kubernetes.io/conditions.argogrpc: |
@@ -40,7 +41,6 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    # check this line
     - http:
         paths:
           - path: /
@@ -48,14 +48,14 @@ spec:
               service:
                 name: argogrpc # The grpc service must be placed before the argocd-server for the listening rules to be created in the correct order
                 port:
-                  number: 443
+                  number: 80
             pathType: Prefix
           - path: /
             backend:
               service:
                 name: argocd-server
                 port:
-                  number: 443
+                  number: 80
             pathType: Prefix
       # host: argocd.argoproj.io
   # tls:
