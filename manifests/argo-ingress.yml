@@ -24,11 +24,14 @@ kind: Ingress
 metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    # alb.ingress.kubernetes.io/backend-protocol: HTTPS
     # Use this annotation (which must match a service name) to route traffic to HTTP2 backends.
     alb.ingress.kubernetes.io/conditions.argogrpc: |
       [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    # TODO: set up a TLS cert
+    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
     # Use this annotation to receive OK - 0 instead of UNIMPLEMENTED - 12 for gRPC health check.
     alb.ingress.kubernetes.io/healthcheck-path: /grpc.health.v1.Health/Check
     alb.ingress.kubernetes.io/success-codes: "0"
@@ -38,8 +41,7 @@ spec:
   ingressClassName: alb
   rules:
     # check this line
-    - host: argocd.argoproj.io
-      http:
+    - http:
         paths:
           - path: /
             backend:
@@ -55,6 +57,7 @@ spec:
                 port:
                   number: 443
             pathType: Prefix
-  tls:
-    - hosts:
-        - argocd.argoproj.io
+      # host: argocd.argoproj.io
+  # tls:
+  #   - hosts:
+  #       - argocd.argoproj.io
