@@ -13,13 +13,13 @@ export AWS_SECRET_ACCESS_KEY="......"
 Encrypt the Secret manifest:
 
 ```bash
-sops --encrypt secrets.yml > secrets.enc.yml
+sops --encrypt secret.yml > secret.enc.yml
 ```
 
 SOPS will factor in rules from `.sops.yml`. After that, to edit secrets:
 
 ```bash
-sops edit secrets.enc.yml
+sops edit secret.enc.yml
 ```
 
 SOPS rotate a key
