@@ -1,6 +1,6 @@
 # FileOps App Manifests
 
-## Using SOPs to encrypt secrets uploaded to Git
+## Using SOPS to encrypt secrets uploaded to Git
 
 Set up env variables:
 
@@ -16,8 +16,17 @@ Encrypt the Secret manifest:
 sops --encrypt secrets.yml > secrets.enc.yml
 ```
 
-SOPs will factor in rules from `.sops.yml`. After that, to edit secrets:
+SOPS will factor in rules from `.sops.yml`. After that, to edit secrets:
 
 ```bash
 sops edit secrets.enc.yml
+```
+
+SOPS rotate a key
+
+Update the key in `.sops.yaml` and run:
+
+```bash
+sops updatekeys base/secret.enc.yml
+sops -r -i base/secret.enc.yml
 ```
