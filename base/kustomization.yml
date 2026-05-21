@@ -7,4 +7,4 @@ resources:
   - backend-service.yml
   - secret.enc.yml
 generators:
-  - ../generators/secret-generator.yml
+  - secret-generator.yml
