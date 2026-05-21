@@ -1,4 +1,4 @@
 creation_rules:
   - path_regex: ".*\\.ya?ml$" # encrypt every .yaml file found
     unencrypted_regex: "^(apiVersion|metadata|kind|type)$" # do not encrypt this values
-    kms: arn:aws:kms:ap-southeast-2:665303624691:key/ddb3f1ef-5194-4fa2-b4e1-e914831a249b
+    kms: arn:aws:kms:ap-southeast-2:665303624691:alias/fileops-dev
