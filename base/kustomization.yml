@@ -5,6 +5,6 @@ resources:
   - backend.yml
   - frontend-service.yml
   - backend-service.yml
-  - secrets.enc.yml
+  - secret.enc.yml
 generators:
   - ../generators/secret-generator.yml
