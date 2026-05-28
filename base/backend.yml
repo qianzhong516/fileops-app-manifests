@@ -51,3 +51,10 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: username
+      volumes:
+        - name:
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: db-secrets
