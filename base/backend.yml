@@ -18,6 +18,10 @@ spec:
       containers:
         - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:b1511c366668f5d12f9583a7c2d8b104a46953c1
           name: fileops-backend
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: /mnt/secrets-store
+              readOnly: true
           env:
             - name: CORS_ORIGIN
               value: frontend-svc.default.svc.cluster.local
