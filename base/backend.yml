@@ -14,13 +14,12 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: backend-db-secrets
       containers:
         - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:0fad9385198486ec801be9361fb821632533c64a
           name: fileops-backend
+          serviceAccount: backend-aws-secret
           env:
-            - name: DATABASE_URL
-              # TODO: inject db url and password here (from TF) - Creating ConfigMaps in TF
-              value: database-1.cry0yoiwuh41.ap-southeast-2.rds.amazonaws.com
             - name: CORS_ORIGIN
               value: frontend-svc.default.svc.cluster.local
             - name: AWS_REGION
@@ -37,3 +36,19 @@ spec:
                 secretKeyRef:
                   name: aws-access-key
                   key: AWS_SECRET_ACCESS_KEY
+            - name: DB_HOST
+              value: db.dev.filesops.com
+            - name: DB_PORT
+              value: 5432
+            - name: DB_NAME
+              value: fileopsdb
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: username
