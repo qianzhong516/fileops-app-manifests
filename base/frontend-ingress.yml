@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/target-type: ip
+    # alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    # Use this annotation (which must match a service name) to route traffic to HTTP2 backends.
+    # alb.ingress.kubernetes.io/conditions.argogrpc: |
+    #   [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
+    # TODO: set up a TLS cert
+    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+  name: web-alb
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          # TODO: Frontend ingress rules should be separate. This is done to save costs.
+          - path: /
+            backend:
+              service:
+                name: frontend-svc
+                port:
+                  number: 80
+            pathType: Prefix
+      # host: argocd.argoproj.io
+  # tls:
+  #   - hosts:
+  #       - argocd.argoproj.io

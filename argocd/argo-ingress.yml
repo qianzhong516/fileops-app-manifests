@@ -49,15 +49,7 @@ spec:
           #       port:
           #         number: 80
           #   pathType: Prefix
-          # TODO: Frontend ingress rules should be separate. This is done to save costs.
           - path: /
-            backend:
-              service:
-                name: frontend-svc
-                port:
-                  number: 80
-            pathType: Prefix
-          - path: /argocd
             backend:
               service:
                 name: argocd-server
