@@ -26,6 +26,8 @@ spec:
               mountPath: /db
               readOnly: true
           env:
+            - name: PORT
+              value: "8080"
             - name: CORS_ORIGIN
               value: frontend-svc.default.svc.cluster.local
             - name: AWS_REGION
