@@ -11,8 +11,8 @@ metadata:
     #   [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
     # TODO: set up a TLS cert
     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
-  name: web-alb
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":8080}]'
+  name: backend-alb
 spec:
   ingressClassName: alb
   rules:
@@ -21,10 +21,11 @@ spec:
           - path: /
             backend:
               service:
-                name: frontend-svc
+                name: backend-svc
                 port:
-                  number: 80
+                  number: 8080
             pathType: Prefix
+
       # host: argocd.argoproj.io
   # tls:
   #   - hosts:

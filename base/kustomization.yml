@@ -9,5 +9,6 @@ resources:
   - db-secrets.yml
   - db-ca-cert.yml
   - frontend-ingress.yml
+  - backend-ingress.yml
 generators:
   - secret-generator.yml

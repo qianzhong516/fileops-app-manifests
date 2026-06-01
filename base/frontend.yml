@@ -22,5 +22,3 @@ spec:
               value: production
             - name: PORT
               value: "3000"
-            - name: NEXT_PUBLIC_BACKEND_URL
-              value: backend-svc.default.svc.cluster.local:8080
