@@ -16,11 +16,14 @@ spec:
     spec:
       serviceAccountName: backend-db-secrets
       containers:
-        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:9fa9430859c067150f2dac4c1736aa2608318350
+        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:b8bedeafee3e8a6a62fba37e0269e34db7c06d56
           name: fileops-backend
           volumeMounts:
             - name: secrets-store-inline
               mountPath: /mnt/secrets-store
+              readOnly: true
+            - name: db-ca-cert-config
+              mountPath: /db
               readOnly: true
           env:
             - name: CORS_ORIGIN
@@ -55,6 +58,8 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: username
+            - name: SSL_ROOT_CERT
+              value: /db/global-bundle.pem
       volumes:
         - name: secrets-store-inline
           csi:
@@ -62,3 +67,9 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: db-secrets
+        - name: db-ca-cert-config
+          configMap:
+            name: db-ca-cert
+            items:
+              - key: global-bundle.pem
+                path: global-bundle.pem

@@ -7,5 +7,6 @@ resources:
   - backend-service.yml
   - backend-db-secrets.yml
   - db-secrets.yml
+  - db-ca-cert.yml
 generators:
   - secret-generator.yml
