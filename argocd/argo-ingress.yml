@@ -1,24 +1,23 @@
-# TODO: gRPC requires HTTPS listeners.
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   annotations:
-#     alb.ingress.kubernetes.io/backend-protocol-version: GRPC # This tells AWS to send traffic from the ALB using GRPC. Plain HTTP2 can be used, but the health checks won't be available because argo currently downgrades non-grpc calls to HTTP1
-#     alb.ingress.kubernetes.io/healthcheck-path: /grpc.health.v1.Health/Check
-#     alb.ingress.kubernetes.io/success-codes: "0"
-#   labels:
-#     app: argogrpc
-#   name: argogrpc
-#   namespace: argocd
-# spec:
-#   ports:
-#     - name: "80"
-#       port: 80
-#       protocol: TCP
-#       targetPort: 8080
-#   selector:
-#     app.kubernetes.io/name: argocd-server
-#   sessionAffinity: None
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/backend-protocol-version: GRPC # This tells AWS to send traffic from the ALB using GRPC. Plain HTTP2 can be used, but the health checks won't be available because argo currently downgrades non-grpc calls to HTTP1
+    alb.ingress.kubernetes.io/healthcheck-path: /grpc.health.v1.Health/Check
+    alb.ingress.kubernetes.io/success-codes: "0"
+  labels:
+    app: argogrpc
+  name: argogrpc
+  namespace: argocd
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: argocd-server
+  sessionAffinity: None
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -28,27 +27,26 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/target-type: ip
-    # alb.ingress.kubernetes.io/backend-protocol: HTTPS
     # Use this annotation (which must match a service name) to route traffic to HTTP2 backends.
-    # alb.ingress.kubernetes.io/conditions.argogrpc: |
-    #   [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
-    # TODO: set up a TLS cert
-    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/conditions.argogrpc: |
+      [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:665303624691:certificate/2ce6c6e9-354b-4227-82e9-450cec561f31
   name: argocd
   namespace: argocd
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: argocd.filesops.com
+      http:
         paths:
-          # - path: /
-          #   backend:
-          #     service:
-          #       name: argogrpc # The grpc service must be placed before the argocd-server for the listening rules to be created in the correct order
-          #       port:
-          #         number: 80
-          #   pathType: Prefix
+          - path: /
+            backend:
+              service:
+                name: argogrpc # The grpc service must be placed before the argocd-server for the listening rules to be created in the correct order
+                port:
+                  number: 80
+            pathType: Prefix
           - path: /
             backend:
               service:
@@ -56,7 +54,3 @@ spec:
                 port:
                   number: 80
             pathType: Prefix
-      # host: argocd.argoproj.io
-  # tls:
-  #   - hosts:
-  #       - argocd.argoproj.io
