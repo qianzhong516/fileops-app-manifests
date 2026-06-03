@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - dashboard.yml
   - datasource.yml
+  - ingress.yml
 generators:
   - secret-generator.yml
