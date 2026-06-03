@@ -5,4 +5,4 @@ resources:
   - datasource.yml
   - grafana.enc.yml
 generators:
-  - ../generators/secret-generator.yml
+  - secret-generator.yml
