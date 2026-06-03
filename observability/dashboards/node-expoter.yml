@@ -8,9 +8,7 @@ metadata:
 spec:
   instanceSelector:
     matchLabels:
-      app.kubernetes.io/instance: grafana-operator
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: grafana-operator
+      dashboards: grafana
   # https://grafana.com/grafana/dashboards/1860-node-exporter-full/
   grafanaCom:
     id: 1860
