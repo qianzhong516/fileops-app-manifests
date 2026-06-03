@@ -1,0 +1,20 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: grafana-dashboard-15757-kubernetes-views-global
+  namespace: default
+  labels:
+    app: grafana
+spec:
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: grafana-operator
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: grafana-operator
+  # https://grafana.com/grafana/dashboards/15757-kubernetes-views-global/
+  grafanaCom:
+    id: 15757
+    revision: 43
+  datasources:
+    - datasourceName: prometheus
+      inputName: prometheus
