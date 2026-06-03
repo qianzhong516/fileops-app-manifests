@@ -2,7 +2,6 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: grafana-dashboard-1860-node-exporter-full
-  namespace: default
   labels:
     app: grafana
 spec:
