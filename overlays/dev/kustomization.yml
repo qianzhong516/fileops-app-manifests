@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - ../../monitoring
   - namespace.yml
 
 namespace: dev

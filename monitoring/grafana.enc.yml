@@ -1,0 +1,21 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+    name: grafana
+    labels:
+        dashboards: grafana
+spec:
+    config:
+        security:
+            admin_user: ENC[AES256_GCM,data:sKIdYoo=,iv:T3YFju1LgmqONWMCfATfN8L71QqPGIFyfwxqa05jW3k=,tag:CkUD6uyRyFZomzJz7k3mIA==,type:str]
+            admin_password: ENC[AES256_GCM,data:U8fZt46Cxa5SOemFJpNGDxuR+zd8clrdg4suQy9SYXg=,iv:XfXGC3LeoNYnM3o113U1v7Ntv8XwqYULZrMzbPxhVVU=,tag:DLys8AouePtB/hzoL8Nz0g==,type:str]
+sops:
+    kms:
+        - arn: arn:aws:kms:ap-southeast-2:665303624691:key/ddb3f1ef-5194-4fa2-b4e1-e914831a249b
+          aws_profile: ""
+          created_at: "2026-06-03T07:04:51Z"
+          enc: AQICAHjiJNsl6KgE2M/vZ26j6K1MI4vd+sXguMWi/HXxa9VzBwEotHrj5nvhRwf1zWXMxkL1AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMRrTO0k1u8M5m2YoPAgEQgDtl3jluU8VsEdYDXUvwKTt5gmZG2IAjXzgKPNq6vB6rYzH6jUz5HivJlra0ob6lT0tpiHauOFTDEgVW3Q==
+    lastmodified: "2026-06-03T07:04:52Z"
+    mac: ENC[AES256_GCM,data:etsf/qMSBaJeLfATRfl1+L3zJoaHg7sh4kcLoefE93Dfy2eM+RnoWFlkYFHrnE0t1ig1lPnfgyDp3l9N6ag18w0SXleKKHXbcy25ITwFS0v/ztCYEw5/OzO4qIdfhK82IWEC6eprmP5TaWyLfUhYS1GyN45c6dxyiDqb8JGwwgg=,iv:asVjydVeiM6mLmlD1OCFsAXun1g+iHgiGKDaCwGoJ2g=,tag:G3YF6IDtbMOsbwh1b9x3rg==,type:str]
+    unencrypted_regex: ^(apiVersion|metadata|kind|type)$
+    version: 3.13.1

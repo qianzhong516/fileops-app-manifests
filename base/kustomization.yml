@@ -11,4 +11,4 @@ resources:
   - frontend-ingress.yml
   - backend-ingress.yml
 generators:
-  - secret-generator.yml
+  - ../generators/secret-generator.yml
