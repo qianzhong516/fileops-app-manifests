@@ -6,7 +6,7 @@ metadata:
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:665303624691:certificate/2ce6c6e9-354b-4227-82e9-450cec561f31
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:665303624691:certificate/78a6d0e9-9f33-4db1-b5d2-b39690226bff
   name: web-alb
 spec:
   ingressClassName: alb
