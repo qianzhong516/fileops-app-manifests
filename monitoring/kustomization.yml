@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - dashboard.yml
   - datasource.yml
-  - grafana.enc.yml
 generators:
   - secret-generator.yml
