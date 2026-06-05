@@ -17,6 +17,9 @@ spec:
       containers:
         - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-frontend:723d3d794b7878fd576a518e649369102230c3bf
           name: fileops-frontend
+          resources:
+            requests:
+            cpu: 50m
           env:
             - name: NODE_ENV
               value: production
