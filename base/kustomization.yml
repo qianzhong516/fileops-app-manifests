@@ -10,5 +10,6 @@ resources:
   - db-ca-cert.yml
   - frontend-ingress.yml
   - backend-ingress.yml
+  - hpa.yml
 generators:
   - secret-generator.yml
