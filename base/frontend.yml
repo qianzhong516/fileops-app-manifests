@@ -5,7 +5,6 @@ metadata:
     app: frontend
   name: frontend
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -27,7 +26,6 @@ spec:
               value: "3000"
         - name: load-generator
           image: busybox
-          restartPolicy: never
           command: ["/bin/sh", "-c"]
           args:
             - while true; do wget -q -O- http://frontend-svc; sleep 0.01; done

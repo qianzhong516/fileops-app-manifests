@@ -8,6 +8,6 @@ resources:
 
 namespace: dev
 
-patches:
-  - path: frontend.yml
-  - path: backend.yml
+# patches:
+#   - path: frontend.yml
+#   - path: backend.yml
