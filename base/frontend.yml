@@ -19,7 +19,7 @@ spec:
           name: fileops-frontend
           resources:
             requests:
-            cpu: 50m
+              cpu: 50m
           env:
             - name: NODE_ENV
               value: production
