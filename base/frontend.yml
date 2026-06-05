@@ -25,3 +25,14 @@ spec:
               value: production
             - name: PORT
               value: "3000"
+        - name: load-generator
+          image: busybox
+          restartPolicy: never
+          command: ["/bin/sh", "-c"]
+          args:
+            - while true; do wget -q -O- http://frontend-svc; sleep 0.01; done
+          resources:
+            requests:
+              cpu: 50m
+            limits:
+              cpu: 200m
