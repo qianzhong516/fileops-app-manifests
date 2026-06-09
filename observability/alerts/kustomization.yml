@@ -4,3 +4,4 @@ resources:
   - alert-contact.yml
   - folder.yml
   - contact-point.yml
+  - cluster-cpu.yml
