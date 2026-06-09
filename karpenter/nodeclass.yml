@@ -5,7 +5,7 @@ metadata:
 spec:
   role: "KarpenterNodeRole-fileops-cluster"
   amiSelectorTerms:
-    - id: ami-017b523dabc835dd4
+    - alias: "al2023@v20260529"
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "fileops-cluster"
