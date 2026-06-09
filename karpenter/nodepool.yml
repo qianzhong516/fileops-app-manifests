@@ -17,7 +17,7 @@ spec:
           values: ["on-demand"]
         - key: karpenter.k8s.aws/instance-category
           operator: In
-          values: ["t"]
+          values: ["c", "m", "r", "t"]
         - key: karpenter.k8s.aws/instance-generation
           operator: Gt
           values: ["3"]
@@ -27,7 +27,7 @@ spec:
         name: default
       expireAfter: 720h
   limits:
-    cpu: 4
+    cpu: 20
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
