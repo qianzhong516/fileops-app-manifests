@@ -3,12 +3,12 @@ kind: GrafanaDatasource
 metadata:
   name: prometheus
 spec:
-  uid: prometheus
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
   datasource:
     name: prom1
+    uid: prometheus
     type: prometheus
     access: proxy
     url: http://prometheus-server.prometheus.svc.cluster.local
