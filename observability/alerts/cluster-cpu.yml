@@ -1,0 +1,87 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaAlertRuleGroup
+metadata:
+  name: cluster-resource-alerts
+spec:
+  folderRef: alerts
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  interval: 1m
+  rules:
+    - uid: b7c8d9e0f1a2436586978809abcdef01
+      title: Cluster CPU usage above 70%
+      condition: C
+      for: 5m
+      noDataState: NoData
+      execErrState: Error
+      notificationSettings:
+        receiver: oncall-email
+      data:
+        - refId: A
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: prometheus
+          model:
+            datasource:
+              type: prometheus
+              uid: prometheus
+            editorMode: code
+            expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+            instant: true
+            intervalMs: 1000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: false
+            refId: A
+        - refId: B
+          datasourceUid: __expr__
+          model:
+            conditions:
+              - evaluator:
+                  params: []
+                  type: gt
+                operator:
+                  type: and
+                query:
+                  params:
+                    - B
+                reducer:
+                  params: []
+                  type: last
+                type: query
+            datasource:
+              type: __expr__
+              uid: __expr__
+            expression: A
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: B
+            type: reduce
+        - refId: C
+          datasourceUid: __expr__
+          model:
+            conditions:
+              - evaluator:
+                  params:
+                    - 70
+                  type: gt
+                operator:
+                  type: and
+                query:
+                  params:
+                    - C
+                reducer:
+                  params: []
+                  type: last
+                type: query
+            datasource:
+              type: __expr__
+              uid: __expr__
+            expression: B
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: C
+            type: threshold

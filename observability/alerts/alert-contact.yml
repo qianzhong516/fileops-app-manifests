@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: alert-contact
+stringData:
+  # Replace with the on-call team member email before deploying.
+  email: ads.gutless810@passinbox.com

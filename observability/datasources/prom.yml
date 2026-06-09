@@ -3,6 +3,7 @@ kind: GrafanaDatasource
 metadata:
   name: prometheus
 spec:
+  uid: prometheus
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
