@@ -4,6 +4,10 @@ metadata:
   labels:
     app: backend
   name: backend-svc
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
 spec:
   ports:
     - port: 8080
