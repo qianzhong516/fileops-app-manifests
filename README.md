@@ -30,3 +30,7 @@ Update the key in `.sops.yaml` and run:
 sops updatekeys base/secret.enc.yml
 sops -r -i base/secret.enc.yml
 ```
+
+## TODOs
+
+- [ ] Set up SMTP settings to make Alert Manager work
