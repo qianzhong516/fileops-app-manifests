@@ -11,5 +11,6 @@ resources:
   - frontend-ingress.yml
   - backend-ingress.yml
   - hpa.yml
+  - scaledobject.yml
 generators:
   - secret-generator.yml
