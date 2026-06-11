@@ -15,7 +15,7 @@ spec:
     spec:
       serviceAccountName: backend-db-secrets
       containers:
-        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:6d8732935685330395a1aac683c4cf2d88e7ad88
+        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:5806e8339498be3c0da3da255147de2f4cac44ca
           name: fileops-backend
           volumeMounts:
             - name: secrets-store-inline
