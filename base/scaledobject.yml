@@ -13,5 +13,5 @@ spec:
       metadata:
         serverAddress: http://prometheus-server.prometheus.svc.cluster.local
         # Each replica should handle about this much of estimated wait time
-        threshold: "300"
-        query: avg(fileops_estimated_wait_seconds)
+        threshold: "1200"
+        query: avg(fileops_estimated_last_job_wait_seconds)
