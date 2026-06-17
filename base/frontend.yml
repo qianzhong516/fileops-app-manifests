@@ -14,7 +14,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-frontend:dc18c47b8541a84e477ca2847d5dc6d244074fcb
+        - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-frontend:10796618efa0881a9c222c85b0b5d8fc8b1922e7
           name: fileops-frontend
           resources:
             requests:
