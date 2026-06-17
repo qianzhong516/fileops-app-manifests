@@ -16,6 +16,10 @@ spec:
       serviceAccountName: backend-db-secrets
       containers:
         - image: 665303624691.dkr.ecr.ap-southeast-2.amazonaws.com/fileops-backend:7712f5c3a459e0002adeb9c6b680616b86c5fc3f
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "512Mi"
           name: fileops-backend
           volumeMounts:
             - name: secrets-store-inline
