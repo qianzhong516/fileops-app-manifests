@@ -7,7 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:665303624691:certificate/8483800a-a6f5-4d72-a9dc-f85f618bbf13
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:665303624691:certificate/5b1a7573-ff72-4e2d-8a7d-6236bcb99f6a
   name: grafana-alb
 spec:
   ingressClassName: alb
